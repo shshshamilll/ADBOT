@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoProcessor, AutoModelForZeroShotObjectDetection
 
-class GroundingDINO():
+class DINO():
     def __init__(self):
         self.processor = AutoProcessor.from_pretrained("IDEA-Research/grounding-dino-tiny")
         self.model = AutoModelForZeroShotObjectDetection.from_pretrained("IDEA-Research/grounding-dino-tiny")
