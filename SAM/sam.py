@@ -9,8 +9,8 @@ class SAM():
 
     def get_mask(self, image_for_sam, box):
         self.mask_predictor.set_image(image_for_sam)
-        result, _, _ = self.mask_predictor.predict(
+        masks, _, _ = self.mask_predictor.predict(
             box=box,
             multimask_output=False
         )
-        return Image.fromarray(np.concatenate([result[0][:, :, np.newaxis]] * 3, axis=2).astype(np.uint8) * 255)
+        return Image.fromarray(np.concatenate([masks[0][:, :, np.newaxis]] * 3, axis=2).astype(np.uint8) * 255)
