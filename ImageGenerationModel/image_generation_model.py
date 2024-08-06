@@ -35,4 +35,4 @@ class ImageGenerationModel():
             negative_prompt="low quality, blury",
             strength=0.075
         ).images[0]
-        image_after_image_to_image_pipeline.save(f"GeneratedImages/generated_image_{number}")
+        image_after_image_to_image_pipeline.save(f"GeneratedImages/generated_image_{number}.png")
