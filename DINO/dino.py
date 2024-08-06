@@ -15,6 +15,6 @@ class DINO():
             inputs.input_ids,
             box_threshold=0.4,
             text_threshold=0.3,
-            target_sizes=[image_for_dino.size[1], image_for_dino.size[0]]
+            target_sizes=[(image_for_dino.size[1], image_for_dino.size[0])]
         )
         return results[0]["boxes"].numpy()
