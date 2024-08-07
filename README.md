@@ -26,3 +26,5 @@ Generation an image
 ```
 python main.py --object "a can of soda" --number 4
 ```
+## Results
+![](results.png)
