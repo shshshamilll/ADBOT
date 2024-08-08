@@ -14,10 +14,11 @@ import os
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--insert", type=str, help="")
-    parser.add_argument("--show", action="store_true", help="")
-    parser.add_argument("--object", type=str, help="")
-    parser.add_argument("--number", type=int, help="")
+    parser.add_argument("--insert", type=str, help="Add a song to the database")
+    parser.add_argument("--show", action="store_true", help="Show the text that is needed to create a control image")
+    parser.add_argument("--object", type=str, help="The object to be redrawn")
+    parser.add_argument("--number", type=int, help="The number of images to be generated")
+    parser.add_argument("--strength", type=float, help="The strength of image to image generation")
     args = parser.parse_args()
 
     load_dotenv()
@@ -86,11 +87,10 @@ def main():
         image_description_model = ImageDescriptionModel(openai_api_key)
         image_description = image_description_model.get_image_description_and_object(image_path)
         embedding = np.array(hf.embed_query(image_description))
-        song_fragment = database.similarity_search(embedding)
-        print(song_fragment)
+        database.similarity_search(embedding)
         database.disconnect()
 
-    if args.object is not None and args.number is not None:
+    if args.object is not None and args.number is not None and args.strength is not None:
         object = args.object
         prompt = args.object
         number = args.number
@@ -104,7 +104,7 @@ def main():
         mask = sam.get_mask(image_for_sam, box)
         image_generation_model = ImageGenerationModel()
         for i in range(number):
-            image_generation_model.generate(prompt, image_for_image_generation_model, mask, control, i)
+            image_generation_model.generate(prompt, image_for_image_generation_model, mask, control, i, args.strength)
 
 if __name__ == "__main__":
     main()

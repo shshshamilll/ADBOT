@@ -21,18 +21,18 @@ class ImageGenerationModel():
         )
         self.image_to_image_pipeline.enable_model_cpu_offload()
 
-    def generate(self, prompt, image_for_image_generation_model, mask, control, number):
+    def generate(self, prompt, image_for_image_generation_model, mask, control, number, strength):
         image_after_inpaint_pipeline = self.inpaint_pipeline(
             prompt=prompt,
             image=image_for_image_generation_model,
             mask_image=mask,
             control_image=control,
-            negative_prompt="low quality, blury"
+            negative_prompt="low quality"
         ).images[0]
         image_after_image_to_image_pipeline = self.image_to_image_pipeline(
             prompt="high quality",
             image=image_after_inpaint_pipeline,
-            negative_prompt="low quality, blury",
-            strength=0.075
+            negative_prompt="low quality",
+            strength=strength
         ).images[0]
         image_after_image_to_image_pipeline.save(f"GeneratedImages/generated_image_{number}.png")

@@ -20,7 +20,7 @@ class Database():
 
     def similarity_search(self, embedding):
         self.cursor.execute(f"SELECT name, song_fragment FROM {self.table_name} ORDER BY embedding <-> %s LIMIT 1;", (embedding,))
-        return self.cursor.fetchall()
+        print(self.cursor.fetchall())
 
     def disconnect(self):
         self.cursor.close()
