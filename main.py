@@ -12,15 +12,7 @@ import cv2
 import numpy as np
 import os
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--insert", type=str, help="Add a song to the database")
-    parser.add_argument("--show", action="store_true", help="Show the text that is needed to create a control image")
-    parser.add_argument("--object", type=str, help="The object to be redrawn")
-    parser.add_argument("--number", type=int, help="The number of images to be generated")
-    parser.add_argument("--strength", type=float, help="The strength of image to image generation")
-    args = parser.parse_args()
-
+def main(args):
     load_dotenv()
 
     if args.insert is not None:
@@ -107,4 +99,11 @@ def main():
             image_generation_model.generate(prompt, image_for_image_generation_model, mask, control, i, args.strength)
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--insert", type=str, help="Add a song to the database")
+    parser.add_argument("--show", action="store_true", help="Show the text that is needed to create a control image")
+    parser.add_argument("--object", type=str, help="The object to be redrawn")
+    parser.add_argument("--number", type=int, help="The number of images to be generated")
+    parser.add_argument("--strength", type=float, help="The strength of image to image generation")
+    args = parser.parse_args()
+    main(args)
