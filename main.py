@@ -40,9 +40,9 @@ def main():
         )
         # Initializing embeddings generation model
         hf = HuggingFaceEmbeddings(
-            model_name = "BAAI/bge-base-en-v1.5",
-            model_kwargs = {"device":'cpu'},
-            encode_kwargs = {'normalize_embeddings':True}
+            model_name="BAAI/bge-base-en-v1.5",
+            model_kwargs={"device":'cpu'},
+            encode_kwargs={'normalize_embeddings':True}
         )
         song_name = args.insert
         def len_func(text):
